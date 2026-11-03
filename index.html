@@ -1,1 +1,343 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENCADÍS — Revista de l'Associació Cultural Remember València</title>
+<meta name="description" content="Revista TRENCADÍS. Números 1, 2 i 3 ja disponibles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe6;
+    --paper-2:#ece5d6;
+    --ink:#1d1a16;
+    --ink-soft:#5c554b;
+    --garnet:#a4123d;
+    --garnet-dark:#7c0e2f;
+    --line:#d8cfbd;
+    --card:#fbf8f1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--garnet);color:#fff;}
 
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,239,230,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1200px;margin:0 auto;padding:.9rem 1.5rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--ink);}
+  .brand img{height:30px;width:auto;display:block;}
+  .brand span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;}
+  .langs{display:flex;gap:.35rem;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:.25rem;}
+  .langs button{
+    border:0;background:transparent;cursor:pointer;
+    font:600 .78rem 'Inter',sans-serif;letter-spacing:.06em;
+    padding:.4rem .85rem;border-radius:999px;color:var(--ink-soft);
+    transition:all .25s ease;
+  }
+  .langs button:hover{color:var(--ink);}
+  .langs button.active{background:var(--garnet);color:#fff;box-shadow:0 2px 8px rgba(164,18,61,.35);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1200px;margin:0 auto;padding:5rem 1.5rem 3.5rem;
+    text-align:center;position:relative;
+  }
+  .hero .kicker{
+    font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--garnet);font-weight:600;
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;font-weight:900;
+    font-size:clamp(2.6rem,7vw,5.2rem);line-height:1.02;
+    margin:1rem 0 1.2rem;letter-spacing:-.01em;
+  }
+  .hero h1 em{font-style:italic;color:var(--garnet);}
+  .hero p{max-width:620px;margin:0 auto;color:var(--ink-soft);font-size:1.08rem;line-height:1.7;}
+  .hero-rule{width:70px;height:3px;background:var(--garnet);margin:2rem auto 0;border-radius:2px;}
+
+  /* ---------- Issues ---------- */
+  .issues{
+    max-width:1200px;margin:0 auto;padding:2rem 1.5rem 5rem;
+  }
+  .section-title{
+    text-align:center;font-family:'Playfair Display',serif;font-weight:700;
+    font-size:clamp(1.6rem,3.5vw,2.3rem);margin-bottom:.6rem;
+  }
+  .section-sub{text-align:center;color:var(--ink-soft);margin-bottom:3rem;font-size:.95rem;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 22px 45px -18px rgba(29,26,22,.28);}
+  .cover{
+    aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);
+    border-bottom:1px solid var(--line);position:relative;
+  }
+  .cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s ease;}
+  .card:hover .cover img{transform:scale(1.04);}
+  .cover .num{
+    position:absolute;top:.9rem;left:.9rem;
+    background:var(--garnet);color:#fff;
+    font:700 .75rem 'Inter',sans-serif;letter-spacing:.12em;
+    padding:.35rem .7rem;border-radius:999px;text-transform:uppercase;
+  }
+  .card-body{padding:1.5rem 1.5rem 1.7rem;display:flex;flex-direction:column;flex:1;gap:.5rem;}
+  .card-body h3{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;}
+  .card-body .date{color:var(--ink-soft);font-size:.85rem;}
+  .card-body .desc{color:var(--ink-soft);font-size:.92rem;line-height:1.6;flex:1;}
+  .price-row{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;gap:.8rem;flex-wrap:wrap;}
+  .price{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;}
+  .buy{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--garnet);color:#fff;text-decoration:none;
+    font:600 .88rem 'Inter',sans-serif;letter-spacing:.04em;
+    padding:.75rem 1.4rem;border-radius:999px;
+    transition:background .25s ease,transform .25s ease,box-shadow .25s ease;
+  }
+  .buy:hover{background:var(--garnet-dark);transform:translateY(-2px);box-shadow:0 8px 18px -6px rgba(124,14,47,.5);}
+  .buy svg{width:15px;height:15px;}
+
+  /* ---------- About / footer ---------- */
+  .about{
+    background:var(--ink);color:var(--paper);
+    padding:4rem 1.5rem;text-align:center;
+  }
+  .about-inner{max-width:680px;margin:0 auto;}
+  .about h2{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:1rem;}
+  .about p{color:#b8b0a2;line-height:1.8;font-size:.95rem;}
+  .about img{height:26px;margin-top:2rem;opacity:.9;filter:brightness(0) invert(1);}
+  footer{background:#14110e;color:#6e675c;font-size:.8rem;text-align:center;padding:1.2rem 1.5rem;}
+
+  [data-i18n]{transition:opacity .18s ease;}
+  .fade [data-i18n]{opacity:0;}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#">
+      <img src="logo.png" alt="TRENCADÍS">
+      <span data-i18n="brand_tag">Associació Cultural Remember València</span>
+    </a>
+    <nav class="langs" aria-label="Idioma / Language">
+      <button data-lang="ca" class="active">Valencià</button>
+      <button data-lang="es">Castellano</button>
+      <button data-lang="en">English</button>
+      <button data-lang="fr">Français</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="kicker" data-i18n="hero_kicker">Revista semestral de memòria urbana</p>
+  <h1 data-i18n="hero_title">La història de València,<br><em>número a número</em></h1>
+  <p data-i18n="hero_sub">Fotografies, històries i records de la València d'abans, recuperats per a les noves generacions. Ja podeu aconseguir els tres primers números.</p>
+  <div class="hero-rule"></div>
+</section>
+
+<section class="issues" id="numeros">
+  <h2 class="section-title" data-i18n="issues_title">Números publicats</h2>
+  <p class="section-sub" data-i18n="issues_sub">Edició en paper · Venda en línia</p>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="cover">
+        <span class="num" data-i18n="issue1_num">Núm. 1</span>
+        <img src="trencadis01.png" alt="Portada del número 1 de TRENCADÍS">
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="issue1_title">Número 1 · Novembre 2019</h3>
+        <p class="date" data-i18n="issue1_desc">El primer número: els orígens de l'Associació i les primeres cròniques de la ciutat que va ser.</p>
+        <div class="price-row">
+          <span class="price" data-i18n="issue1_price">6 €</span>
+          <!-- 🔗 POSA ACÍ L'ENLLAÇ DE VENDA DEL NÚMERO 1 -->
+          <a class="buy" href="#" data-i18n="buy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+            Comprar
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cover">
+        <span class="num" data-i18n="issue2_num">Núm. 2</span>
+        <img src="trencadis02.jpg" alt="Portada del número 2 de TRENCADÍS">
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="issue2_title">Número 2 · Març 2021</h3>
+        <p class="date" data-i18n="issue2_desc">El segon número: el tramvia 238, els carrers perduts i el comerç que va donar vida a la ciutat.</p>
+        <div class="price-row">
+          <span class="price" data-i18n="issue2_price">6 €</span>
+          <!-- 🔗 POSA ACÍ L'ENLLAÇ DE VENDA DEL NÚMERO 2 -->
+          <a class="buy" href="#" data-i18n="buy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+            Comprar
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cover">
+        <span class="num" data-i18n="issue3_num">Núm. 3</span>
+        <img src="trencadis03.jpg" alt="Portada del número 3 de TRENCADÍS">
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="issue3_title">Número 3 · Gener 2024</h3>
+        <p class="date" data-i18n="issue3_desc">El tercer número: motos i carreres, la fira de Mostenses i noves històries de la memòria valenciana.</p>
+        <div class="price-row">
+          <span class="price" data-i18n="issue3_price">6 €</span>
+          <!-- 🔗 POSA ACÍ L'ENLLAÇ DE VENDA DEL NÚMERO 3 -->
+          <a class="buy" href="#" data-i18n="buy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+            Comprar
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-inner">
+    <h2 data-i18n="about_title">Sobre la revista</h2>
+    <p data-i18n="about_text">TRENCADÍS és la revista de l'Associació Cultural Remember València. Cada número recull fotografies inèdites, testimonis i investigació sobre la història recent de la ciutat: el seu transport, el seu comerç, les seues festes i, sobretot, la gent que la va viure.</p>
+    <img src="logo.png" alt="TRENCADÍS">
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footer">© Associació Cultural Remember València · revistatrencadis.org</span>
+</footer>
+
+<script>
+const I18N = {
+  ca: {
+    brand_tag: "Associació Cultural Remember València",
+    hero_kicker: "Revista semestral de memòria urbana",
+    hero_title: "La història de València,<br><em>número a número</em>",
+    hero_sub: "Fotografies, històries i records de la València d'abans, recuperats per a les noves generacions. Ja podeu aconseguir els tres primers números.",
+    issues_title: "Números publicats",
+    issues_sub: "Edició en paper · Venda en línia",
+    issue1_num: "Núm. 1", issue1_title: "Número 1 · Novembre 2019",
+    issue1_desc: "El primer número: els orígens de l'Associació i les primeres cròniques de la ciutat que va ser.",
+    issue1_price: "6 €",
+    issue2_num: "Núm. 2", issue2_title: "Número 2 · Març 2021",
+    issue2_desc: "El segon número: el tramvia 238, els carrers perduts i el comerç que va donar vida a la ciutat.",
+    issue2_price: "6 €",
+    issue3_num: "Núm. 3", issue3_title: "Número 3 · Gener 2024",
+    issue3_desc: "El tercer número: motos i carreres, la fira de Mostenses i noves històries de la memòria valenciana.",
+    issue3_price: "6 €",
+    buy: "Comprar",
+    about_title: "Sobre la revista",
+    about_text: "TRENCADÍS és la revista de l'Associació Cultural Remember València. Cada número recull fotografies inèdites, testimonis i investigació sobre la història recent de la ciutat: el seu transport, el seu comerç, les seues festes i, sobretot, la gent que la va viure.",
+    footer: "© Associació Cultural Remember València · revistatrencadis.org"
+  },
+  es: {
+    brand_tag: "Asociación Cultural Remember València",
+    hero_kicker: "Revista semestral de memoria urbana",
+    hero_title: "La historia de València,<br><em>número a número</em>",
+    hero_sub: "Fotografías, historias y recuerdos de la València de antes, recuperados para las nuevas generaciones. Ya podéis conseguir los tres primeros números.",
+    issues_title: "Números publicados",
+    issues_sub: "Edición en papel · Venta en línea",
+    issue1_num: "Núm. 1", issue1_title: "Número 1 · Noviembre 2019",
+    issue1_desc: "El primer número: los orígenes de la Asociación y las primeras crónicas de la ciudad que fue.",
+    issue1_price: "6 €",
+    issue2_num: "Núm. 2", issue2_title: "Número 2 · Marzo 2021",
+    issue2_desc: "El segundo número: el tranvía 238, las calles perdidas y el comercio que dio vida a la ciudad.",
+    issue2_price: "6 €",
+    issue3_num: "Núm. 3", issue3_title: "Número 3 · Enero 2024",
+    issue3_desc: "El tercer número: motos y carreras, la feria de Mostenses y nuevas historias de la memoria valenciana.",
+    issue3_price: "6 €",
+    buy: "Comprar",
+    about_title: "Sobre la revista",
+    about_text: "TRENCADÍS es la revista de la Asociación Cultural Remember València. Cada número reúne fotografías inéditas, testimonios e investigación sobre la historia reciente de la ciudad: su transporte, su comercio, sus fiestas y, sobre todo, la gente que la vivió.",
+    footer: "© Asociación Cultural Remember València · revistatrencadis.org"
+  },
+  en: {
+    brand_tag: "Remember València Cultural Association",
+    hero_kicker: "A biannual journal of urban memory",
+    hero_title: "The history of València,<br><em>issue by issue</em>",
+    hero_sub: "Photographs, stories and memories of the València of old, recovered for new generations. The first three issues are now available.",
+    issues_title: "Published issues",
+    issues_sub: "Print edition · Online sales",
+    issue1_num: "No. 1", issue1_title: "Issue 1 · November 2019",
+    issue1_desc: "The first issue: the origins of the Association and the first chronicles of the city that once was.",
+    issue1_price: "€6",
+    issue2_num: "No. 2", issue2_title: "Issue 2 · March 2021",
+    issue2_desc: "The second issue: tram 238, the lost streets and the shops that brought the city to life.",
+    issue2_price: "€6",
+    issue3_num: "No. 3", issue3_title: "Issue 3 · January 2024",
+    issue3_desc: "The third issue: motorbikes and races, the Mostenses fair and new stories from Valencian memory.",
+    issue3_price: "€6",
+    buy: "Buy",
+    about_title: "About the magazine",
+    about_text: "TRENCADÍS is the magazine of the Remember València Cultural Association. Each issue brings together unpublished photographs, eyewitness accounts and research into the city's recent past: its transport, its shops, its festivals and, above all, the people who lived it.",
+    footer: "© Remember València Cultural Association · revistatrencadis.org"
+  },
+  fr: {
+    brand_tag: "Association Culturelle Remember València",
+    hero_kicker: "Revue semestrielle de mémoire urbaine",
+    hero_title: "L'histoire de València,<br><em>numéro après numéro</em>",
+    hero_sub: "Photographies, récits et souvenirs de l'ancienne València, retrouvés pour les nouvelles générations. Les trois premiers numéros sont désormais disponibles.",
+    issues_title: "Numéros publiés",
+    issues_sub: "Édition papier · Vente en ligne",
+    issue1_num: "N° 1", issue1_title: "Numéro 1 · Novembre 2019",
+    issue1_desc: "Le premier numéro : les origines de l'Association et les premières chroniques de la ville d'autrefois.",
+    issue1_price: "6 €",
+    issue2_num: "N° 2", issue2_title: "Numéro 2 · Mars 2021",
+    issue2_desc: "Le deuxième numéro : le tramway 238, les rues perdues et le commerce qui faisait vivre la ville.",
+    issue2_price: "6 €",
+    issue3_num: "N° 3", issue3_title: "Numéro 3 · Janvier 2024",
+    issue3_desc: "Le troisième numéro : motos et courses, la foire de Mostenses et de nouveaux récits de la mémoire valencienne.",
+    issue3_price: "6 €",
+    buy: "Acheter",
+    about_title: "À propos de la revue",
+    about_text: "TRENCADÍS est la revue de l'Association Culturelle Remember València. Chaque numéro rassemble des photographies inédites, des témoignages et des recherches sur l'histoire récente de la ville : ses transports, ses commerces, ses fêtes et, surtout, les gens qui l'ont vécue.",
+    footer: "© Association Culturelle Remember València · revistatrencadis.org"
+  }
+};
+
+const buttons = document.querySelectorAll('.langs button');
+
+function setLang(lang){
+  document.documentElement.classList.add('fade');
+  setTimeout(() => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (I18N[lang] && I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.documentElement.classList.remove('fade');
+  }, 180);
+}
+
+buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+</script>
+</body>
+</html>
